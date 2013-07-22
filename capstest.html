@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<script src="WebSQLiteWrapper.js"></script>
+<script>
+function docapstest1() {
+  var db = webSQLiteWrapper.openDatabase({name: 'capstest'});
+  db.executeSql("select upper('Test1')", [], function(tx, res) {
+    var res = "test 1 result: " + JSON.stringify(res.rows.item(0));
+    document.writeln(res + "<br/>");
+  });
+}
+function docapstest2() {
+  var db = webSQLiteWrapper.openDatabase({name: 'capstest'});
+  db.transaction(function(tx) {
+    tx.executeSql("select upper('Test1')", [], function(tx, res) {
+      var res = "test 2 result: " + JSON.stringify(res.rows.item(0));
+      document.writeln(res + "<br/>");
+    });
+  });
+}
+function docapstest() {
+  document.writeln("<h2>features</h2>");
+  document.writeln("sqlite features: " + JSON.stringify(webSQLiteWrapper.sqliteFeatures));
+  document.writeln("<br/>");
+  var db = webSQLiteWrapper.openDatabase({name: 'capstest'});
+  document.writeln("database features: " + JSON.stringify(db.databaseFeatures));
+  document.writeln("<h2>caps test</h2>");
+  docapstest1();
+  docapstest2();
+}
+</script>
+<body onload="docapstest()">
+</body>
+</html>
