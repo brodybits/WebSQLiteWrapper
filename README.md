@@ -30,3 +30,15 @@ Transaction batching:
       });
     });
 
+Check if db is from Web sqlite wrapper:
+
+    if (!!db.databaseFeatures && !!db.databaseFeatures.isWebSQLiteDatabaseWrapper)
+      alert("Web sqlite wrapper database");
+
+Check if you are using Web sqlite wrapper:
+
+    var sqlite = window.webSQLiteWrapper;
+
+    if (!!sqlite.sqliteFeatures && sqlite.sqliteFeatures.isWebSQLiteWrapper)
+      alert("Using Web sqlite wrapper");
+
